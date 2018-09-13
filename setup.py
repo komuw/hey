@@ -13,8 +13,7 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version="0.0.1",
     description="hey hey",
-    long_description="hey hey hey"
-    
+    long_description="hey hey hey",   
     classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha
@@ -49,7 +48,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=[],
+    install_requires=["PyGithub"],
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
     # for example:

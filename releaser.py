@@ -19,7 +19,8 @@ class Releaser:
         tag: string eg "v0.0.1"
         message: string
         object: string, The SHA of the git object this is tagging.
-        type: string,  The type of the object we're tagging. Normally this is a commit but it can also be a tree or a blob.
+        type: string,  The type of the object we're tagging.
+          Normally this is a commit but it can also be a tree or a blob.
         """
         existing_tags = self.myRepo.get_tags()
         latest_tag = existing_tags[0]
@@ -44,7 +45,13 @@ class Releaser:
         """
         2.
         then we call:
-        myRelease = myRepo.create_git_release(tag, name, message, draft=False, prerelease=False, target_commitish=github.GithubObject.NotSet) # returns github.GitRelease.GitRelease
+        myRelease = myRepo.create_git_release(tag,
+                                             name,
+                                             message,
+                                             draft=False,
+                                             prerelease=False,
+                                             target_commitish=github.GithubObject.NotSet)
+                                             # returns github.GitRelease.GitRelease
         where;
         tag: string eg "v0.0.1"
         name: string, The name of the release.
@@ -53,7 +60,8 @@ class Releaser:
                         :class:`github.Branch.Branch` or
                         :class:`github.Commit.Commit` or
                         :class:`github.GitCommit.GitCommit`
-                            Specifies the commitish value that determines where the Git tag is created from.
+                            Specifies the commitish value that determines
+                            where the Git tag is created from.
                             Can be any branch or commit SHA. Unused if the Git tag already exists.
                             Default: the repository's default branch(master)
                             """
@@ -108,24 +116,26 @@ class Releaser:
         if bdist_wheel_exitcode != 0:
             sys.exit(bdist_wheel_exitcode)
 
-    def upload_assets(self, new_tag):
+    def upload_assets(self, new_tag, release):
         """
         4.
         then we call;
-        myRelease.upload_asset(path, label='', content_type='') # myRelease is a github.GitRelease.GitRelease
+        myRelease.upload_asset(path, label='', content_type='')
+        # myRelease is a github.GitRelease.GitRelease
         where;
         path: string, The path to The file name of the asset.
         label: string, An alternate short description of the asset. Used in place of the filename.
-        content_type: string, eg "application/zip". github accepts this list of media-types: https://www.iana.org/assignments/media-types/media-types.xhtml
+        content_type: string, eg "application/zip".
+        github accepts this list of media-types:
+          https://www.iana.org/assignments/media-types/media-types.xhtml
         we use the files created in step 3 above in our upload_asset() call as the assets
         """
-        current_dir = os.getcwd()
         distribution_dir = os.path.join(os.getcwd(), "dist")
         wheel_file = os.path.join(
             distribution_dir,
             "hey-{version}-py3-none-any.whl".format(version=new_tag.replace("v", "")),
         )
-        myRelease.upload_asset(
+        release.upload_asset(
             path=wheel_file,
             label="hey wheel version={version}".format(version=new_tag),
             content_type="",
@@ -137,11 +147,11 @@ class Releaser:
 
 
 if __name__ == "__main__":
-    github_token = os.getenv("HEY_GITHUB_TOKEN")
-    pr_link = os.getenv("CIRCLE_PULL_REQUEST")
-    current_sha = os.getenv("CIRCLE_SHA1")
-    github_user = os.getenv("CIRCLE_USERNAME")
-    branch_been_built = os.getenv("CIRCLE_BRANCH")
+    github_token = os.environ["HEY_GITHUB_TOKEN"]
+    pr_link = "cool"  # get this from somewhere, release notes file?
+    current_sha = os.environ["CIRCLE_SHA1"]
+    github_user = os.environ["CIRCLE_USERNAME"]
+    branch_been_built = os.environ["CIRCLE_BRANCH"]
 
     if branch_been_built != "master":
         print("\n Not master branch. We wont create a new release.")
@@ -149,6 +159,6 @@ if __name__ == "__main__":
     releaser = Releaser(github_token=github_token, repo_name="komuw/hey")
     git_tag = releaser.create_tag()
     release_notes = ["added feature one", "added feature 2", "fixed security bug"]
-    self.create_release(new_tag=git_tag.name, release_notes=release_notes)
-    self.create_distribution()
-    self.upload_assets(new_tag=git_tag.name)
+    release = releaser.create_release(new_tag=git_tag.name, release_notes=release_notes)
+    releaser.create_distribution()
+    releaser.upload_assets(new_tag=git_tag.name)

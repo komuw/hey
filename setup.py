@@ -52,7 +52,7 @@ setup(
     # dependencies). You can install these using the following syntax,
     # for example:
     # $ pip install -e .[dev,test]
-    extras_require={"dev": ["twine", "wheel"], "test": ["flake8==3.5.0"]},
+    extras_require={"dev": ["twine", "wheel"], "test": ["flake8==3.5.0", "pylint==2.1.1"]},
 )
 
 # python packaging documentation:

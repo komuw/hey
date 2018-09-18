@@ -148,7 +148,7 @@ if __name__ == "__main__":
     github_token = os.environ["HEY_GITHUB_TOKEN"]
     pr_link = "cool"  # get this from somewhere, release notes file?
     current_sha = os.environ["CIRCLE_SHA1"]
-    github_user = os.environ["CIRCLE_USERNAME"]
+    user_name = os.environ["CIRCLE_USERNAME"]
     branch_been_built = os.environ["CIRCLE_BRANCH"]
 
     if branch_been_built != "master":
@@ -158,7 +158,9 @@ if __name__ == "__main__":
     git_tag = releaser.create_tag()
     release_notes = ["added feature one", "added feature 2", "fixed security bug"]
     release = releaser.create_release(
-        new_tag=git_tag.tag, release_notes=release_notes, github_user=github_user
+        new_tag=git_tag.tag,
+        release_notes=release_notes,
+        github_user="https://github.com/" + user_name,
     )
     releaser.create_distribution()
     releaser.upload_assets(new_tag=git_tag.tag, release=release)

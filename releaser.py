@@ -132,10 +132,7 @@ class Releaser:
         we use the files created in step 3 above in our upload_asset() call as the assets
         """
         distribution_dir = os.path.join(os.getcwd(), "dist")
-        wheel_file = os.path.join(
-            distribution_dir,
-            "hey-{version}-py3-none-any.whl".format(version=new_tag.replace("v", "")),
-        )
+        wheel_file = os.path.join(distribution_dir, "hey-0.0.1-py3-none-any.whl")
         release.upload_asset(
             path=wheel_file,
             label="hey wheel version={version}".format(version=new_tag),

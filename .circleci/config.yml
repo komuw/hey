@@ -15,7 +15,8 @@ jobs:
       - run:
           name: run tests
           command: |
-            echo "no tests now"
+            flake8 releaser.py
+            pylint --enable=E --disable=W,R,C --unsafe-load-any-extension=y releaser.py
 
       - run:
           name: deploy

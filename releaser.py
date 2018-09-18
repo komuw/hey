@@ -41,7 +41,7 @@ class Releaser:
         )
         return git_tag
 
-    def create_release(self, new_tag, release_notes):
+    def create_release(self, new_tag, release_notes, github_user):
         """
         2.
         then we call:
@@ -80,7 +80,7 @@ class Releaser:
 **release_notes:**
 {release_notes}
         """.format(
-            releaser="komuw",
+            releaser=github_user,
             version=new_tag,
             jira_link="https://komuprod.atlassian.net/browse/JKL-207",
             pr_link=pr_link,
@@ -157,6 +157,8 @@ if __name__ == "__main__":
     releaser = Releaser(github_token=github_token, repo_name="komuw/hey")
     git_tag = releaser.create_tag()
     release_notes = ["added feature one", "added feature 2", "fixed security bug"]
-    release = releaser.create_release(new_tag=git_tag.tag, release_notes=release_notes)
+    release = releaser.create_release(
+        new_tag=git_tag.tag, release_notes=release_notes, github_user=github_user
+    )
     releaser.create_distribution()
     releaser.upload_assets(new_tag=git_tag.tag, release=release)

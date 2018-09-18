@@ -47,7 +47,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=["PyGithub==1.43.2", "black"],
+    install_requires=["PyGithub==1.43.2", "pyyaml==3.13", "black"],
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
     # for example:

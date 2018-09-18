@@ -26,10 +26,10 @@ jobs:
                 else
                     ChangedFiles=`git diff --name-only origin/master`
                     case "$ChangedFiles" in
-                        *RELEASE_NOTES.*)
+                        *RELEASE_DATA.*)
                             printf "\n Thanks, your commits include update to release notes. \n";;
                         *)
-                            printf "\n\t You should add release notes to .github/RELEASE_NOTES.md \n\n" && exit 77;;
+                            printf "\n\t You should add release notes to .github/RELEASE_DATA.yaml\n\n" && exit 77;;
                     esac
                 fi
 

@@ -20,5 +20,7 @@ jobs:
 
       - run:
           name: deploy
-          command: |      
+          command: |
+            chmod -R a+rwx ~/repo
+            stat ~/repo
             python releaser.py

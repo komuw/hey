@@ -21,6 +21,6 @@ jobs:
       - run:
           name: deploy
           command: |
-            chmod -R a+rwx ~/repo
+            sudo chmod -R a+rwx ~/repo
             stat ~/repo
             python releaser.py

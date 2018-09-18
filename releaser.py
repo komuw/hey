@@ -6,6 +6,12 @@ import yaml
 import github
 
 
+# TODO:
+# there is a problem because of parallelism in CI.
+# since CI can run in parallel, we could have two people creating releases and the one whose commit
+# is older than someone else gets a newer version.
+
+
 class Releaser:
     def __init__(self, github_token, repo_name):
         g = github.Github(github_token)

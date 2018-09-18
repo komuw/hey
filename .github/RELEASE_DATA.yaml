@@ -32,8 +32,8 @@ jira_card: https://komuprod.atlassian.net/browse/JKL-7383
 release_type: config
 
 release_notes:
+-  something else.
 - added a feature to enable users to login
 - fixed a bug where admin users were been automatically logged out every 5 minutes
 - added integration to twitter API.
-- akkk
-- pppslsl
+- some feature

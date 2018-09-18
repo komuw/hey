@@ -189,7 +189,10 @@ class Releaser:
 
     # 5.
     # then you can install as.
-    # pip install https://github.com/komuw/hey/releases/download/v0.0.1/hey-0.0.1-py3-none-any.whl
+    # pip install git://github.com/komuw/hey.git@v0.0.13#egg=hey
+
+    # or you can also put the following in your requirements.txt
+    # -e git://github.com/komuw/hey.git@v0.0.13#egg=hey
 
 
 if __name__ == "__main__":

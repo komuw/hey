@@ -13,7 +13,7 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version="0.0.1",
     description="hey hey",
-    long_description="hey hey hey",   
+    long_description="hey hey hey",
     classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha
@@ -39,7 +39,6 @@ setup(
     keywords="hey",
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-
     packages=find_packages(exclude=["docs", "*tests*", "examples"]),
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
@@ -48,17 +47,12 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=["PyGithub", "black"],
+    install_requires=["PyGithub==1.43.2", "black"],
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
     # for example:
     # $ pip install -e .[dev,test]
-    extras_require={
-        "dev": ["twine", "wheel"],
-        "test": [
-            "flake8==3.5.0",
-        ],
-    },
+    extras_require={"dev": ["twine", "wheel"], "test": ["flake8==3.5.0"]},
 )
 
 # python packaging documentation:

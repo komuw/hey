@@ -159,7 +159,11 @@ class Releaser:
         distribution_dir = os.path.join(os.getcwd(), "dist")
         wheel_file = os.path.join(distribution_dir, "hey-0.0.1-py3-none-any.whl")
         label = "hey wheel version={version}".format(version=new_tag)
-        print("creating release asset. path={path}. label={label}.".format(path=path, label=label))
+        print(
+            "creating release asset. path={path}. label={label}.".format(
+                path=wheel_file, label=label
+            )
+        )
         release.upload_asset(
             path=wheel_file, label=label, content_type=""
         )  # myRelease is a github.GitRelease.GitRelease

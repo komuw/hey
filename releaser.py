@@ -159,6 +159,6 @@ if __name__ == "__main__":
     releaser = Releaser(github_token=github_token, repo_name="komuw/hey")
     git_tag = releaser.create_tag()
     release_notes = ["added feature one", "added feature 2", "fixed security bug"]
-    release = releaser.create_release(new_tag=git_tag.name, release_notes=release_notes)
+    release = releaser.create_release(new_tag=git_tag.tag, release_notes=release_notes)
     releaser.create_distribution()
-    releaser.upload_assets(new_tag=git_tag.name)
+    releaser.upload_assets(new_tag=git_tag.tag, release=release)

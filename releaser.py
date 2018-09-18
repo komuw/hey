@@ -23,7 +23,9 @@ class Releaser:
           Normally this is a commit but it can also be a tree or a blob.
         """
         existing_tags = self.myRepo.get_tags()
+        print("existing_tags:", existing_tags)
         latest_tag = existing_tags[0]
+        print("latest_tag:", latest_tag)
         latest_tag_name = latest_tag.name
         new_tag = (
             "v"
@@ -32,12 +34,22 @@ class Releaser:
         )
         tag_message = "tag:{tag}".format(tag=new_tag)
         tag_object = current_sha
+        print(
+            "creating git tag. tag={tag}. message={message}. commit={commit}".format(
+                tag=new_tag, message=tag_message, commit=tag_object
+            )
+        )
         git_tag = self.myRepo.create_git_tag(
             tag=new_tag,
             message=tag_message,
             object=tag_object,
             type="commit",
             tagger=github.GithubObject.NotSet,
+        )
+        print(
+            "successfully created git tag. tag={tag}. message={message}. commit={commit}".format(
+                tag=new_tag, message=tag_message, commit=tag_object
+            )
         )
         return git_tag
 
@@ -87,6 +99,11 @@ class Releaser:
             release_type="config",
             release_notes=rel_notes,
         )
+        print(
+            "creating git release. tag={tag}. name={name}. message={message}".format(
+                tag=new_tag, name=release_name, message=release_msg
+            )
+        )
         myRelease = self.myRepo.create_git_release(
             tag=new_tag,
             name=release_name,
@@ -94,6 +111,11 @@ class Releaser:
             draft=False,
             prerelease=False,
             target_commitish=github.GithubObject.NotSet,
+        )
+        print(
+            "successfully created git release. tag={tag}. name={name}. message={message}".format(
+                tag=new_tag, name=release_name, message=release_msg
+            )
         )
         return myRelease
 
@@ -105,17 +127,20 @@ class Releaser:
         python setup.py bdist_wheel
         this will create python packages.
         """
+        print("creating sdist distribution")
         sdist_exitcode, sdist_data = subprocess.getstatusoutput("python setup.py sdist")
         print("sdist_data output:\n", sdist_data)
         if sdist_exitcode != 0:
             sys.exit(sdist_exitcode)
 
+        print("creating bdist_wheel distribution")
         bdist_wheel_exitcode, bdist_wheel_data = subprocess.getstatusoutput(
             "python setup.py bdist_wheel"
         )
         print("bdist_wheel_data output:\n", bdist_wheel_data)
         if bdist_wheel_exitcode != 0:
             sys.exit(bdist_wheel_exitcode)
+        print("successfully created  distribution.")
 
     def upload_assets(self, new_tag, release):
         """
@@ -133,10 +158,10 @@ class Releaser:
         """
         distribution_dir = os.path.join(os.getcwd(), "dist")
         wheel_file = os.path.join(distribution_dir, "hey-0.0.1-py3-none-any.whl")
+        label = "hey wheel version={version}".format(version=new_tag)
+        print("creating release asset. path={path}. label={label}.".format(path=path, label=label))
         release.upload_asset(
-            path=wheel_file,
-            label="hey wheel version={version}".format(version=new_tag),
-            content_type="",
+            path=wheel_file, label=label, content_type=""
         )  # myRelease is a github.GitRelease.GitRelease
 
     # 5.
@@ -164,3 +189,8 @@ if __name__ == "__main__":
     )
     releaser.create_distribution()
     releaser.upload_assets(new_tag=git_tag.tag, release=release)
+    print(
+        "successfully created a new release. release_url={release_url}.".format(
+            release_url=release.url
+        )
+    )

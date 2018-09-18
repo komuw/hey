@@ -10,6 +10,21 @@ class Releaser:
         g = github.Github(github_token)
         self.myRepo = g.get_repo(repo_name)  # returns a github.Repository.Repository
 
+    def calculate_next_tag(self, latest_tag_name):
+        """
+        given the current tag, calculate the next one.
+        eg:
+          if latest_tag_name == 'v0.0.10'
+          then this method should return 'v0.0.11'
+        This method is on it's own so that we can properly test it's implementation.
+        """
+        new_tag = (
+            "v"
+            + latest_tag_name.replace("v", "")[:4]
+            + str(int(latest_tag_name.replace("v", "").split(".")[-1]) + 1)
+        )
+        return new_tag
+
     def create_tag(self):
         """
         1.
@@ -26,12 +41,8 @@ class Releaser:
         print("existing_tags:", existing_tags)
         latest_tag = existing_tags[0]
         print("latest_tag:", latest_tag)
-        latest_tag_name = latest_tag.name
-        new_tag = (
-            "v"
-            + latest_tag_name.replace("v", "")[:4]
-            + str(int(latest_tag_name.replace("v", "")[-1]) + 1)
-        )
+        latest_tag_name = latest_tag.name  # eg; 'v0.0.10'
+        new_tag = self.calculate_next_tag(latest_tag_name=latest_tag_name)
         tag_message = "tag:{tag}".format(tag=new_tag)
         tag_object = current_sha
         print(

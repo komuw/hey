@@ -2,6 +2,7 @@ import os
 import sys
 import subprocess
 
+import yaml
 import github
 
 
@@ -17,6 +18,8 @@ class Releaser:
           if latest_tag_name == 'v0.0.10'
           then this method should return 'v0.0.11'
         This method is on it's own so that we can properly test it's implementation.
+        Currently we only increment the patch of semver, this method should be extended
+        so that it can also be able to increment major/minor versions as required.
         """
         new_tag = (
             "v"
@@ -89,9 +92,14 @@ class Releaser:
                             Default: the repository's default branch(master)
                             """
         release_name = "release: {0}".format(new_tag)
-        rel_notes = ""
-        for i in release_notes:
-            rel_notes = rel_notes + "- " + i + "\n"
+
+        f = open(".github/RELEASE_DATA.yaml")
+        release_data = yaml.load(f.read())
+        f.close()
+        rel_notes = release_data["release_notes"]
+        release_notes = ""
+        for i in rel_notes:
+            release_notes = release_notes + "- " + i + "\n"
 
         # formatted this way so as to conform with markdown
         release_msg = """
@@ -105,10 +113,10 @@ class Releaser:
         """.format(
             releaser=github_user,
             version=new_tag,
-            jira_link="https://komuprod.atlassian.net/browse/JKL-207",
-            pr_link=pr_link,
-            release_type="config",
-            release_notes=rel_notes,
+            jira_link=release_data["jira_card"],
+            pr_link=release_data["pull_request"],
+            release_type=release_data["release_type"],
+            release_notes=release_notes,
         )
         print(
             "creating git release. tag={tag}. name={name}. message={message}".format(

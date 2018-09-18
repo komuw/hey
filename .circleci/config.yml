@@ -17,6 +17,21 @@ jobs:
           command: |
             flake8 releaser.py
             pylint --enable=E --disable=W,R,C --unsafe-load-any-extension=y releaser.py
+      
+      - run:
+            name: check if changes have release notes 
+            command: |
+                if [ "$CIRCLE_BRANCH" == "master" ]; then
+                    printf "\n $CIRCLE_BRANCH branch, ignoring check for relese notes \n"
+                else
+                    ChangedFiles=`git diff --name-only origin/master`
+                    case "$ChangedFiles" in
+                        *RELEASE_DATA.*)
+                            printf "\n Thanks, your commits include update to release notes. \n";;
+                        *)
+                            printf "\n\t You should add release notes to .github/RELEASE_DATA.yaml\n\n" && exit 77;;
+                    esac
+                fi
 
       - run:
           name: deploy

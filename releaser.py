@@ -70,14 +70,15 @@ class Releaser:
         for i in release_notes:
             rel_notes = rel_notes + "- " + i + "\n"
 
+        # formatted this way so as to conform with markdown
         release_msg = """
-        **releaser:** {releaser}
-        **version:** {version}
-        **jira:** {jira_link}
-        **PR:** {pr_link}
-        **release_type:** {release_type}
-        **release_notes:**
-        {release_notes}
+**releaser:** {releaser}
+**version:** {version}
+**jira:** {jira_link}
+**PR:** {pr_link}
+**release_type:** {release_type}
+**release_notes:**
+{release_notes}
         """.format(
             releaser="komuw",
             version=new_tag,

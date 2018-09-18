@@ -206,9 +206,7 @@ if __name__ == "__main__":
     git_tag = releaser.create_tag()
     release_notes = ["added feature one", "added feature 2", "fixed security bug"]
     release = releaser.create_release(
-        new_tag=git_tag.tag,
-        release_notes=release_notes,
-        github_user="https://github.com/" + user_name,
+        new_tag=git_tag.tag, release_notes=release_notes, github_user="@" + user_name
     )
     releaser.create_distribution()
     releaser.upload_assets(new_tag=git_tag.tag, release=release)

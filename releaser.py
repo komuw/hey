@@ -1,5 +1,7 @@
 import os
+import sys
 import subprocess
+
 import github
 
 
@@ -88,9 +90,13 @@ myRelease = myRepo.create_git_release(
 # this will create python packages.
 sdist_exitcode, sdist_data = subprocess.getstatusoutput("python setup.py sdist")
 print("sdist_data output:\n", sdist_data)
+if sdist_exitcode != 0:
+    sys.exit(sdist_exitcode)
+
 bdist_wheel_exitcode, bdist_wheel_data = subprocess.getstatusoutput("python setup.py bdist_wheel")
 print("bdist_wheel_data output:\n", bdist_wheel_data)
-# TODO: exit if the exitcodes are not zero
+if bdist_wheel_exitcode != 0:
+    sys.exit(bdist_wheel_exitcode)
 
 # 4.
 # then we call;

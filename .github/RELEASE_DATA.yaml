@@ -27,11 +27,13 @@
 # - added integration to twitter API.
 
 
-pull_request: https://github.com/komuw/hey/pull/2
-jira_card: https://komuprod.atlassian.net/browse/JKL-207
+pull_request: https://github.com/komuw/hey/pull/3
+jira_card: https://komuprod.atlassian.net/browse/JKL-7383
 release_type: config
 
 release_notes:
 - added a feature to enable users to login
 - fixed a bug where admin users were been automatically logged out every 5 minutes
 - added integration to twitter API.
+- akkk
+- pppslsl

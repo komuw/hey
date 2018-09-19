@@ -7,7 +7,7 @@
 # The items that are neccessary are:
   # 1. pull_request. This is a link to the github pull request that contains your changes.
   # 2. jira_card. This is a link to the jira card that you were working on.
-  # 3. release_type. This is the type of change that your changes entails. There are 44 types of releases:
+  # 3. release_type. This is the type of change that your changes entails. There are 4 types of releases:
     # a. code
     # b. infra
     # c. config

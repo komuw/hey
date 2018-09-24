@@ -119,7 +119,7 @@ alternatively, you could add the following to your `requirements.txt` file:
 **releaser:** {releaser}
 **version:** {version}
 **jira:** {jira_link}
-**PR:** {pr_link}
+**pull request:** {pr_link}
 **release_type:** {release_type}
 **release_notes:**
 {release_notes}

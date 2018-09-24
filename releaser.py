@@ -114,7 +114,7 @@ class Releaser:
 you can install this release as:
 `pip install git://github.com/{repo_name}.git@{version}#egg=hey`
 alternatively, you could add the following to your `requirements.txt` file:
-`-e git://github.com/{repo_name}.git@{version}#egg=hey`
+`-e git+git://github.com/{repo_name}.git@{version}#egg=hey`
 
 **releaser:** {releaser}
 **version:** {version}

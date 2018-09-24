@@ -110,7 +110,7 @@ class Releaser:
 
         # formatted this way so as to conform with markdown
         release_msg = """
-**install instructions:**
+**install_instructions:**
 you can install this release as:
 `pip install git://github.com/{repo_name}.git@{version}#egg=hey`
 alternatively, you could add the following to your `requirements.txt` file:
@@ -119,7 +119,7 @@ alternatively, you could add the following to your `requirements.txt` file:
 **releaser:** {releaser}
 **version:** {version}
 **jira:** {jira_link}
-**pull request:** {pr_link}
+**pull_request:** {pr_link}
 **release_type:** {release_type}
 **release_notes:**
 {release_notes}

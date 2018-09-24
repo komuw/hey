@@ -26,14 +26,13 @@
 # - added integration to twitter API.
 
 
-pull_request: https://github.com/komuw/hey/pull/5
+pull_request: https://github.com/komuw/hey/pull/6
 jira_card: https://komuprod.atlassian.net/browse/JKL-5645
 release_type: config
 release_notes:
-- added integration with ElasticSearch for log analysis and storage.
+- added integration with Splunk for log analysis and storage.
 - added emoji support, finally.
 - fixed a bug where admin users were been automatically logged out every 5 minutes
 - added integration to twitter API.
-- some other feature.
 - okay yeah, and you can now tag your releases with release notes.
 

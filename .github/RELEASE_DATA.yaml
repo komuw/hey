@@ -20,7 +20,6 @@
 # pull_request: https://github.com/komuw/hey/pull/2
 # jira_card: https://komuprod.atlassian.net/browse/JKL-207
 # release_type: config
-
 # release_notes:
 # - added a feature to enable users to login
 # - fixed a bug where admin users were been automatically logged out every 5 minutes
@@ -30,10 +29,10 @@
 pull_request: https://github.com/komuw/hey/pull/3
 jira_card: https://komuprod.atlassian.net/browse/JKL-7383
 release_type: config
-
 release_notes:
--  something else.
-- added a feature to enable users to login
+- added integration with ElasticSearch for log analysis and storage.
+- added emoji support, finally :grin: :grin: :grin:
 - fixed a bug where admin users were been automatically logged out every 5 minutes
 - added integration to twitter API.
-- some feature
+- some other feature.
+- okay yeah, and you can now tag your releases with release notes.

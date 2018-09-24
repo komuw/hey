@@ -14,8 +14,9 @@ import github
 
 class Releaser:
     def __init__(self, github_token, repo_name):
+        self.repo_name = repo_name
         g = github.Github(github_token)
-        self.myRepo = g.get_repo(repo_name)  # returns a github.Repository.Repository
+        self.myRepo = g.get_repo(self.repo_name)  # returns a github.Repository.Repository
 
     def calculate_next_tag(self, latest_tag_name):
         """
@@ -116,6 +117,12 @@ class Releaser:
 **release_type:** {release_type}
 **release_notes:**
 {release_notes}
+
+**install instructions:**
+you can install this release as:
+`pip install git://github.com/{repo_name}.git@{version}#egg=hey`
+alternatively, you could add the following to your `requirements.txt` file:
+`-e git://github.com/{repo_name}.git@{version}#egg=hey`
         """.format(
             releaser=github_user,
             version=new_tag,
@@ -123,6 +130,7 @@ class Releaser:
             pr_link=release_data["pull_request"],
             release_type=release_data["release_type"],
             release_notes=release_notes,
+            repo_name=self.repo_name,
         )
         print(
             "creating git release. tag={tag}. name={name}. message={message}".format(

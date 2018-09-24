@@ -30,7 +30,7 @@ pull_request: https://github.com/komuw/hey/pull/6
 jira_card: https://komuprod.atlassian.net/browse/JKL-5645
 release_type: config
 release_notes:
-- added integration with microsoft API.
-- added feature ABC
-- fixed bug 5
+- added integration with yahoo API.
+- added feature Q
+- fixed bug 6
 

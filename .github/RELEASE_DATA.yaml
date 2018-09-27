@@ -27,10 +27,10 @@
 
 
 pull_request: https://github.com/komuw/hey/pull/6
-jira_card: https://komuprod.atlassian.net/browse/JKL-5645
+jira_card: https://komuprod.atlassian.net/browse/JKL-121
 release_type: config
 release_notes:
-- added integration with twitter API.
-- added feature Z
-- fixed bug 9
+- added a feature so that the Hey API now returns hello
+- fixed bug where the api would return an int instead of a string
+- added integration with ElasticCache
 

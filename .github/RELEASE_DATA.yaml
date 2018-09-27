@@ -26,7 +26,7 @@
 # - added integration to twitter API.
 
 
-pull_request: https://github.com/komuw/hey/pull/6
+pull_request: https://github.com/komuw/hey/pull/12
 jira_card: https://komuprod.atlassian.net/browse/JKL-121
 release_type: config
 release_notes:

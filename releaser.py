@@ -18,7 +18,7 @@ class Releaser:
         g = github.Github(github_token)
         self.myRepo = g.get_repo(self.repo_name)  # returns a github.Repository.Repository
 
-    def calculate_next_tag(self, latest_tag_name):
+    def calculate_next_tag(self, latest_tag_name, tagging_strategy):
         """
         given the current tag, calculate the next one.
         eg:
@@ -28,12 +28,19 @@ class Releaser:
         Currently we only increment the patch of semver, this method should be extended
         so that it can also be able to increment major/minor versions as required.
         """
+
         new_tag = (
             "v"
             + latest_tag_name.replace("v", "")[:4]
             + str(int(latest_tag_name.replace("v", "").split(".")[-1]) + 1)
         )
         return new_tag
+
+    def get_release_data(self):
+        f = open(".github/RELEASE_DATA.yaml")
+        release_data = yaml.load(f.read())
+        f.close()
+        return release_data
 
     def create_tag(self):
         """
@@ -52,7 +59,13 @@ class Releaser:
         latest_tag = existing_tags[0]
         print("latest_tag:", latest_tag)
         latest_tag_name = latest_tag.name  # eg; 'v0.0.10'
-        new_tag = self.calculate_next_tag(latest_tag_name=latest_tag_name)
+
+        release_data = self.get_release_data()
+        tagging_strategy = release_data["tagging_strategy"]
+
+        new_tag = self.calculate_next_tag(
+            latest_tag_name=latest_tag_name, tagging_strategy=tagging_strategy
+        )
         tag_message = "tag:{tag}".format(tag=new_tag)
         tag_object = current_sha
         print(
@@ -100,9 +113,7 @@ class Releaser:
                             """
         release_name = "release: {0}".format(new_tag)
 
-        f = open(".github/RELEASE_DATA.yaml")
-        release_data = yaml.load(f.read())
-        f.close()
+        release_data = self.get_release_data()
         rel_notes = release_data["release_notes"]
         release_notes = ""
         for i in rel_notes:

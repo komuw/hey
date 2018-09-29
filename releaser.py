@@ -203,10 +203,10 @@ alternatively, you could add the following to your `requirements.txt` file:
 
     # 5.
     # then you can install as.
-    # pip install git://github.com/komuw/hey.git@v0.0.13#egg=hey
+    # pip install git+git://github.com/komuw/hey.git@v0.0.24#egg=hey
 
     # or you can also put the following in your requirements.txt
-    # -e git://github.com/komuw/hey.git@v0.0.13#egg=hey
+    # -e git://github.com/komuw/hey.git@v0.0.24#egg=hey
 
 
 if __name__ == "__main__":

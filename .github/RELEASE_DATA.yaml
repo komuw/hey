@@ -13,13 +13,15 @@
     # c. config
     # d. migration
     # Your changes should be labelled with one of the above.
-  # 4. release_notes. This is a YAML list of the changes that your PR contains.
+  # 4. tagging_strategy. This is either MAJOR, MINOR or PATCH. see https://semver.org/ for their meaning
+  # 5. release_notes. This is a YAML list of the changes that your PR contains.
 
 # An example is shown below:
 
 # pull_request: https://github.com/komuw/hey/pull/2
 # jira_card: https://komuprod.atlassian.net/browse/JKL-207
 # release_type: config
+# tagging_strategy: patch
 # release_notes:
 # - added a feature to enable users to login
 # - fixed a bug where admin users were been automatically logged out every 5 minutes
@@ -29,8 +31,9 @@
 pull_request: https://github.com/komuw/hey/pull/12
 jira_card: https://komuprod.atlassian.net/browse/JKL-121
 release_type: config
+tagging_strategy: minor
 release_notes:
-- added a feature so that the Hey API now returns hello
-- fixed bug where the api would return an int instead of a string
+- added a feature to be able to tag on tag_type
+- removed feature X
 - added integration with ElasticCache
 

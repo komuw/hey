@@ -18,7 +18,7 @@ class Releaser:
         g = github.Github(github_token)
         self.myRepo = g.get_repo(self.repo_name)  # returns a github.Repository.Repository
 
-    def calculate_next_tag(self, latest_tag_name):
+    def calculate_next_tag(self, latest_tag_name, tagging_strategy):
         """
         given the current tag, calculate the next one.
         eg:
@@ -28,12 +28,22 @@ class Releaser:
         Currently we only increment the patch of semver, this method should be extended
         so that it can also be able to increment major/minor versions as required.
         """
-        new_tag = (
-            "v"
-            + latest_tag_name.replace("v", "")[:4]
-            + str(int(latest_tag_name.replace("v", "").split(".")[-1]) + 1)
-        )
+        major_ver, minor_ver, patch_ver = latest_tag_name.replace("v", "").split(".")
+        if tagging_strategy == "major":
+            major_ver = str(int(major_ver) + 1)
+        elif tagging_strategy == "minor":
+            minor_ver = str(int(minor_ver) + 1)
+        else:
+            patch_ver = str(int(patch_ver) + 1)
+
+        new_tag = "v" + major_ver + "." + minor_ver + "." + patch_ver
         return new_tag
+
+    def get_release_data(self):
+        f = open(".github/RELEASE_DATA.yaml")
+        release_data = yaml.load(f.read())
+        f.close()
+        return release_data
 
     def create_tag(self):
         """
@@ -52,7 +62,13 @@ class Releaser:
         latest_tag = existing_tags[0]
         print("latest_tag:", latest_tag)
         latest_tag_name = latest_tag.name  # eg; 'v0.0.10'
-        new_tag = self.calculate_next_tag(latest_tag_name=latest_tag_name)
+
+        release_data = self.get_release_data()
+        tagging_strategy = release_data["tagging_strategy"].lower()
+
+        new_tag = self.calculate_next_tag(
+            latest_tag_name=latest_tag_name, tagging_strategy=tagging_strategy
+        )
         tag_message = "tag:{tag}".format(tag=new_tag)
         tag_object = current_sha
         print(
@@ -74,7 +90,7 @@ class Releaser:
         )
         return git_tag
 
-    def create_release(self, new_tag, release_notes, github_user):
+    def create_release(self, new_tag, github_user):
         """
         2.
         then we call:
@@ -100,9 +116,7 @@ class Releaser:
                             """
         release_name = "release: {0}".format(new_tag)
 
-        f = open(".github/RELEASE_DATA.yaml")
-        release_data = yaml.load(f.read())
-        f.close()
+        release_data = self.get_release_data()
         rel_notes = release_data["release_notes"]
         release_notes = ""
         for i in rel_notes:
@@ -203,10 +217,10 @@ alternatively, you could add the following to your `requirements.txt` file:
 
     # 5.
     # then you can install as.
-    # pip install git://github.com/komuw/hey.git@v0.0.13#egg=hey
+    # pip install git+git://github.com/komuw/hey.git@v0.0.24#egg=hey
 
     # or you can also put the following in your requirements.txt
-    # -e git://github.com/komuw/hey.git@v0.0.13#egg=hey
+    # -e git://github.com/komuw/hey.git@v0.0.24#egg=hey
 
 
 if __name__ == "__main__":
@@ -221,10 +235,7 @@ if __name__ == "__main__":
         sys.exit(0)
     releaser = Releaser(github_token=github_token, repo_name="komuw/hey")
     git_tag = releaser.create_tag()
-    release_notes = ["added feature one", "added feature 2", "fixed security bug"]
-    release = releaser.create_release(
-        new_tag=git_tag.tag, release_notes=release_notes, github_user="@" + user_name
-    )
+    release = releaser.create_release(new_tag=git_tag.tag, github_user="@" + user_name)
     releaser.create_distribution()
     releaser.upload_assets(new_tag=git_tag.tag, release=release)
     print(

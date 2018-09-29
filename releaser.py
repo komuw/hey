@@ -74,7 +74,7 @@ class Releaser:
         )
         return git_tag
 
-    def create_release(self, new_tag, release_notes, github_user):
+    def create_release(self, new_tag, github_user):
         """
         2.
         then we call:
@@ -221,10 +221,7 @@ if __name__ == "__main__":
         sys.exit(0)
     releaser = Releaser(github_token=github_token, repo_name="komuw/hey")
     git_tag = releaser.create_tag()
-    release_notes = ["added feature one", "added feature 2", "fixed security bug"]
-    release = releaser.create_release(
-        new_tag=git_tag.tag, release_notes=release_notes, github_user="@" + user_name
-    )
+    release = releaser.create_release(new_tag=git_tag.tag, github_user="@" + user_name)
     releaser.create_distribution()
     releaser.upload_assets(new_tag=git_tag.tag, release=release)
     print(

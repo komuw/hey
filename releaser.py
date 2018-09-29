@@ -31,8 +31,11 @@ class Releaser:
         major_ver, minor_ver, patch_ver = latest_tag_name.replace("v", "").split(".")
         if tagging_strategy == "major":
             major_ver = str(int(major_ver) + 1)
+            minor_ver = "0"
+            patch_ver = "0"
         elif tagging_strategy == "minor":
             minor_ver = str(int(minor_ver) + 1)
+            patch_ver = "0"
         else:
             patch_ver = str(int(patch_ver) + 1)
 

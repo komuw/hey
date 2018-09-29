@@ -61,7 +61,7 @@ class Releaser:
         latest_tag_name = latest_tag.name  # eg; 'v0.0.10'
 
         release_data = self.get_release_data()
-        tagging_strategy = release_data["tagging_strategy"]
+        tagging_strategy = release_data["tagging_strategy"].lower()
 
         new_tag = self.calculate_next_tag(
             latest_tag_name=latest_tag_name, tagging_strategy=tagging_strategy

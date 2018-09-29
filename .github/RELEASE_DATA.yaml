@@ -33,7 +33,7 @@ jira_card: https://komuprod.atlassian.net/browse/JKL-121
 release_type: config
 tagging_strategy: minor
 release_notes:
-- added a feature so that the Hey API now returns hello
-- fixed bug where the api would return an int instead of a string
+- added a feature to be able to tag on tag_type
+- removed feature X
 - added integration with ElasticCache
 

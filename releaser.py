@@ -28,12 +28,15 @@ class Releaser:
         Currently we only increment the patch of semver, this method should be extended
         so that it can also be able to increment major/minor versions as required.
         """
+        major_ver, minor_ver, patch_ver = latest_tag_name.replace("v", "").split(".")
+        if tagging_strategy == "major":
+            major_ver = str(int(major_ver) + 1)
+        elif tagging_strategy == "minor":
+            minor_ver = str(int(minor_ver) + 1)
+        else:
+            patch_ver = str(int(patch_ver) + 1)
 
-        new_tag = (
-            "v"
-            + latest_tag_name.replace("v", "")[:4]
-            + str(int(latest_tag_name.replace("v", "").split(".")[-1]) + 1)
-        )
+        new_tag = "v" + major_ver + "." + minor_ver + "." + patch_ver
         return new_tag
 
     def get_release_data(self):

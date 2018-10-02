@@ -28,9 +28,11 @@
 # - added integration to twitter API.
 
 
-pull_request: https://github.com/komuw/hey/pull/17
-jira_card: https://komuprod.atlassian.net/browse/JKL-123
-release_type: config
-tagging_strategy: MINOR
+pull_request: https://github.com/komuw/hey/pull/16
+jira_card: https://komuprod.atlassian.net/browse/KW-352
+release_type: code
+tagging_strategy: MAJOR
 release_notes:
-- added feature where version numbers should come from git tags
+- Added feature so that the hello api now accepts a user supplied variable.
+- fixed a bug where unauthentiated users could see profiles of logged in users.
+- Fixed a minor typo in the api documentation for logging in via facebook.

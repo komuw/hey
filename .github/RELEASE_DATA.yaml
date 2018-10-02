@@ -36,4 +36,3 @@ release_notes:
 - Added feature so that the hello api now accepts a user supplied variable.
 - fixed a bug where unauthentiated users could see profiles of logged in users.
 - Fixed a minor typo in the api documentation for logging in via facebook.
-

@@ -1,1 +1,1 @@
-from .main import Hey 
+from .main import Hey

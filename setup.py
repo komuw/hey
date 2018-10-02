@@ -6,12 +6,27 @@ from setuptools import setup, find_packages
 # To use a consistent encoding
 import codecs
 
+
+# pitfalls of python package versioning:
+# 1. https://packaging.python.org/guides/single-sourcing-package-version/
+# 2. https://milkr.io/kfei/5-common-patterns-to-version-your-Python-package
+
+
+def local_scheme(version):
+    return ""
+
+
+def version_scheme(version):
+    return str(version.tag)
+
+
 setup(
     name="hey",
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version="0.0.1",
+    setup_requires=["setuptools_scm"],
+    use_scm_version={"version_scheme": version_scheme, "local_scheme": local_scheme},
     description="hey hey",
     long_description="hey hey hey",
     classifiers=[

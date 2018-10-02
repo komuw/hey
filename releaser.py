@@ -182,7 +182,7 @@ alternatively, you could add the following to your `requirements.txt` file:
         print("git_pull_data output:\n", git_pull_data)
         if git_pull_exitcode != 0:
             print("\n git pull did not succeed. exit_code:{0}".format(git_pull_exitcode))
-            sys.exit(sdist_exitcode)
+            sys.exit(git_pull_exitcode)
 
         print("creating sdist distribution")
         sdist_exitcode, sdist_data = subprocess.getstatusoutput("python setup.py sdist")

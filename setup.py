@@ -25,8 +25,8 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    use_scm_version={"version_scheme": version_scheme, "local_scheme": local_scheme},
     setup_requires=["setuptools_scm"],
+    use_scm_version={"version_scheme": version_scheme, "local_scheme": local_scheme},
     description="hey hey",
     long_description="hey hey hey",
     classifiers=[

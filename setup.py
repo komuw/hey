@@ -12,12 +12,20 @@ import codecs
 # 2. https://milkr.io/kfei/5-common-patterns-to-version-your-Python-package
 
 
+def local_scheme(version):
+    return ""
+
+
+def version_scheme(version):
+    return str(version.tag)
+
+
 setup(
     name="hey",
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    use_scm_version=True,
+    use_scm_version={"version_scheme": version_scheme, "local_scheme": local_scheme},
     setup_requires=["setuptools_scm"],
     description="hey hey",
     long_description="hey hey hey",

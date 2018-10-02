@@ -28,12 +28,9 @@
 # - added integration to twitter API.
 
 
-pull_request: https://github.com/komuw/hey/pull/12
-jira_card: https://komuprod.atlassian.net/browse/JKL-121
+pull_request: https://github.com/komuw/hey/pull/17
+jira_card: https://komuprod.atlassian.net/browse/JKL-123
 release_type: config
 tagging_strategy: MINOR
 release_notes:
-- added a feature to enable users to login
-- fixed a bug where admin users were been automatically logged out every 5 minutes
-- added integration with ElasticCache API
-
+- added feature where version numbers should come from git tags

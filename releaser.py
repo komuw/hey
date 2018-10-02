@@ -208,7 +208,8 @@ alternatively, you could add the following to your `requirements.txt` file:
         """
         distribution_dir = os.path.join(os.getcwd(), "dist")
         wheel_file = os.path.join(
-            distribution_dir, "hey-{version}-py3-none-any.whl".format(version=new_tag)
+            distribution_dir,
+            "hey-{version}-py3-none-any.whl".format(version=new_tag.replace("v", "")),
         )
         label = "hey wheel version={version}".format(version=new_tag)
         print(

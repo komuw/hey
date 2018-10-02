@@ -177,10 +177,18 @@ alternatively, you could add the following to your `requirements.txt` file:
         python setup.py bdist_wheel
         this will create python packages.
         """
+        print("git pull so as to get the latest tag created in releaser.create_tag()")
+        git_pull_exitcode, git_pull_data = subprocess.getstatusoutput("git pull")
+        print("git_pull_data output:\n", git_pull_data)
+        if git_pull_exitcode != 0:
+            print("\n git pull did not succeed. exit_code:{0}".format(git_pull_exitcode))
+            sys.exit(sdist_exitcode)
+
         print("creating sdist distribution")
         sdist_exitcode, sdist_data = subprocess.getstatusoutput("python setup.py sdist")
         print("sdist_data output:\n", sdist_data)
         if sdist_exitcode != 0:
+            print("\n python setup.py sdist did not succeed. exit_code:{0}".format(sdist_exitcode))
             sys.exit(sdist_exitcode)
 
         print("creating bdist_wheel distribution")
@@ -189,6 +197,11 @@ alternatively, you could add the following to your `requirements.txt` file:
         )
         print("bdist_wheel_data output:\n", bdist_wheel_data)
         if bdist_wheel_exitcode != 0:
+            print(
+                "\n python setup.py bdist_wheel did not succeed. exit_code:{0}".format(
+                    bdist_wheel_exitcode
+                )
+            )
             sys.exit(bdist_wheel_exitcode)
         print("successfully created  distribution.")
 

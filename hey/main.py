@@ -1,5 +1,5 @@
 class Hey:
-    def hello(self):
-        print("hello")
+    def hello(self, greeting):
+        print(greeting)
 
-        return "hello"
+        return greeting

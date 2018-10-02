@@ -207,7 +207,9 @@ alternatively, you could add the following to your `requirements.txt` file:
         we use the files created in step 3 above in our upload_asset() call as the assets
         """
         distribution_dir = os.path.join(os.getcwd(), "dist")
-        wheel_file = os.path.join(distribution_dir, "hey-0.0.1-py3-none-any.whl")
+        wheel_file = os.path.join(
+            distribution_dir, "hey-{version}-py3-none-any.whl".format(version=new_tag)
+        )
         label = "hey wheel version={version}".format(version=new_tag)
         print(
             "creating release asset. path={path}. label={label}.".format(

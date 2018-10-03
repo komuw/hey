@@ -1,5 +1,7 @@
 import os
 import sys
+import time
+import random
 import subprocess
 
 import yaml
@@ -60,6 +62,12 @@ class Releaser:
         type: string,  The type of the object we're tagging.
           Normally this is a commit but it can also be a tree or a blob.
         """
+        # there's a small(but non zero) chance of a race condition between
+        # two deployments/releases happening at the same time and they trying
+        # to increment the same tag.
+        # we add time.sleep to decrease chances of a race condition.
+        time.sleep(random.randint(1, 6))
+
         existing_tags = self.myRepo.get_tags()
         print("existing_tags:", existing_tags)
         latest_tag = existing_tags[0]

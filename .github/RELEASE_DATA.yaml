@@ -31,7 +31,7 @@
 pull_request: https://github.com/komuw/hey/pull/18
 jira_card: https://komuprod.atlassian.net/browse/KW-451
 release_type: code
-tagging_strategy: MINOR
+tagging_strategy: PATCH
 release_notes:
 - Extended the Hey api so that it now has a goodbye method.
 - added Basic authentication to all API's.

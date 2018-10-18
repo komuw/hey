@@ -30,12 +30,11 @@
 # - added integration to twitter API.
 
 
-pull_request: https://github.com/komuw/hey/pull/20
-jira_card: https://komuprod.atlassian.net/browse/SH-567
-release_type: infra
+pull_request: https://github.com/komuw/hey/pull/21
+jira_card: https://komuprod.atlassian.net/browse/KK-167
+release_type: code
 tagging_strategy: PATCH
-release_title: Migrate BACK to AWS
+release_title: Use collapsible blocks
 release_notes:
-- replace Google cloud buckets with AWS S3.
-- we are still keeping GCP kubernetes since it's more mature than the AWS offering.
-- replace GCP load balancers with AWS ALB's.
+- use collapsible markdown blocks to show install instructions.
+- fix bug number 4.

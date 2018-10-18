@@ -144,11 +144,21 @@ class Releaser:
 **release_notes:**
 {release_notes}
 
-**install_instructions:**
-you can install this release using:
-1. `pip install git+git://github.com/{repo_name}.git@{version}#egg=hey`
-2. alternatively, you could add the following to your `requirements.txt` file:
-`-e git://github.com/{repo_name}.git@{version}#egg=hey`
+
+<details><summary><strong>install_instructions:</strong>(click to expand)</summary>
+<p>
+you can install this release using:</br>
+1.
+<i><strong>
+pip install git+git://github.com/{repo_name}.git@{version}#egg=hey
+</strong></i>
+</br>
+2. alternatively, you could add the following to your <i>requirements.txt</i> file:</br>
+<i><strong>
+-e git://github.com/{repo_name}.git@{version}#egg=hey
+</strong></i>
+</p>
+</details>
         """.format(
             release_title=release_title,
             releaser=github_user,

@@ -31,7 +31,7 @@
 
 
 pull_request: https://github.com/komuw/hey/pull/20
-jira_card: https://komuprod.atlassian.net/browse/SH-565
+jira_card: https://komuprod.atlassian.net/browse/SH-567
 release_type: infra
 tagging_strategy: PATCH
 release_title: Migrate BACK to AWS

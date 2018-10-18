@@ -148,7 +148,7 @@ class Releaser:
 <details><summary><strong>install_instructions:</strong>(click to expand)</summary>
 <p>
 you can install this release using:</br>
-1. 
+1.
 <i><strong>
 pip install git+git://github.com/{repo_name}.git@{version}#egg=hey
 </strong></i>

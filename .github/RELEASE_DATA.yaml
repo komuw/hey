@@ -30,12 +30,12 @@
 # - added integration to twitter API.
 
 
-pull_request: https://github.com/komuw/hey/pull/19
-jira_card: https://komuprod.atlassian.net/browse/SH-565
+pull_request: https://github.com/komuw/hey/pull/20
+jira_card: https://komuprod.atlassian.net/browse/SH-567
 release_type: infra
 tagging_strategy: PATCH
-release_title: Migrate to GCP cloud
+release_title: Migrate BACK to AWS
 release_notes:
-- replaced AWS S3 with Google cloud buckets.
-- replaced AWS kubernetes with google cloud kubernetes service.
-- replaced AWS ELB with Google cloud Geo load balancers.
+- replace Google cloud buckets with AWS S3.
+- we are still keeping GCP kubernetes since it's more mature than the AWS offering.
+- replace GCP load balancers with AWS ALB's.

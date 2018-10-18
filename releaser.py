@@ -135,12 +135,6 @@ class Releaser:
 
         # formatted this way so as to conform with markdown
         release_msg = """
-**install_instructions:**
-you can install this release as:
-`pip install git+git://github.com/{repo_name}.git@{version}#egg=hey`
-alternatively, you could add the following to your `requirements.txt` file:
-`-e git://github.com/{repo_name}.git@{version}#egg=hey`
-
 **release_title:** {release_title}
 **releaser:** {releaser}
 **version:** {version}
@@ -149,6 +143,12 @@ alternatively, you could add the following to your `requirements.txt` file:
 **release_type:** {release_type}
 **release_notes:**
 {release_notes}
+
+**install_instructions:**
+you can install this release using:
+1. `pip install git+git://github.com/{repo_name}.git@{version}#egg=hey`
+2. alternatively, you could add the following to your `requirements.txt` file:
+`-e git://github.com/{repo_name}.git@{version}#egg=hey`
         """.format(
             release_title=release_title,
             releaser=github_user,

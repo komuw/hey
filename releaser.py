@@ -125,9 +125,9 @@ class Releaser:
                             Can be any branch or commit SHA. Unused if the Git tag already exists.
                             Default: the repository's default branch(master)
                             """
-        release_name = "release: {0}".format(new_tag)
-
         release_data = self.get_release_data()
+        release_title = release_data.get("release_title", "release: {0}".format(new_tag))
+
         rel_notes = release_data["release_notes"]
         release_notes = ""
         for i in rel_notes:
@@ -141,6 +141,7 @@ you can install this release as:
 alternatively, you could add the following to your `requirements.txt` file:
 `-e git://github.com/{repo_name}.git@{version}#egg=hey`
 
+**release_title:** {release_title}
 **releaser:** {releaser}
 **version:** {version}
 **jira:** {jira_link}
@@ -149,6 +150,7 @@ alternatively, you could add the following to your `requirements.txt` file:
 **release_notes:**
 {release_notes}
         """.format(
+            release_title=release_title,
             releaser=github_user,
             version=new_tag,
             jira_link=release_data["jira_card"],
@@ -159,12 +161,12 @@ alternatively, you could add the following to your `requirements.txt` file:
         )
         print(
             "creating git release. tag={tag}. name={name}. message={message}".format(
-                tag=new_tag, name=release_name, message=release_msg
+                tag=new_tag, name=release_title, message=release_msg
             )
         )
         myRelease = self.myRepo.create_git_release(
             tag=new_tag,
-            name=release_name,
+            name=release_title,
             message=release_msg,
             draft=False,
             prerelease=False,
@@ -172,7 +174,7 @@ alternatively, you could add the following to your `requirements.txt` file:
         )
         print(
             "successfully created git release. tag={tag}. name={name}. message={message}".format(
-                tag=new_tag, name=release_name, message=release_msg
+                tag=new_tag, name=release_title, message=release_msg
             )
         )
         return myRelease
